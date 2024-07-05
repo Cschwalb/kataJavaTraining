@@ -594,4 +594,22 @@ public class Kata
         }
         return sum;
     }
+
+    public static boolean solution2(String str, String ending) {
+        int sizeOfEnd = ending.length();
+        int sizeOfStr = str.length();
+        if(sizeOfEnd > sizeOfStr)
+            return false;
+        if(str.substring(sizeOfStr - sizeOfEnd, sizeOfStr).equals(ending))
+        {
+            return true;
+        }
+        else
+            return false;
+        // there's another solution too!
+        /*
+
+        return str.endsWith(ending);
+         */
+    }
 }
