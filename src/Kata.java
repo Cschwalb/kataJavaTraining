@@ -577,15 +577,20 @@ public class Kata
 
     public static int sumNoDuplicates(int[] arr){
         //Put your code here ʌ_ʌ
-        Set<Integer> seen = new HashSet<>();
-        int sum = 0;
+        Set<Integer> uniques = new HashSet<>();
+        Set<Integer> duplicates = new HashSet<>();
 
-        for(int num : arr)
+        for(int i : arr)
         {
-            if(!seen.contains(num)) {
-                sum += num;
-                seen.add(num);
-            }
+            if(!uniques.add(i))
+                duplicates.add(i);
+        }
+
+        uniques.removeAll(duplicates);
+        int sum = 0;
+        for(Integer i : uniques)
+        {
+            sum += i;
         }
         return sum;
     }
