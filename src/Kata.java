@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Kata
 {
@@ -611,5 +613,212 @@ public class Kata
 
         return str.endsWith(ending);
          */
+    }
+
+    public static String testStreams()
+    {
+        List<String> names = Arrays.asList("Caleb", "Chloe", "John M", "Zelda", "Jake", "Kai");
+        int sum = (int) names.stream().count();
+        sum = (int) names.stream().filter(x->x.equals("Zelda")).count();
+        sum = (int) names.stream().filter(x-> x.length() > 1).count();
+        List<String> filteredNames = names.stream()
+                .filter(name -> name.startsWith("C"))
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+        System.out.println(filteredNames.toString());
+        List<String> filter = names.stream().filter(name -> name.length() > 1).map(String::toUpperCase).collect(Collectors.toList());
+        System.out.println(filter.toString());
+        List<String> characterMax = names.stream().sorted((s1, s2) -> Integer.compare(s1.length(), s2.length())).collect(Collectors.toList());
+        return (characterMax.toString());
+    }
+
+    public static void sortArray(List<String> names)
+    {
+        System.out.println(names.stream().count());
+        System.out.println(names.stream().sorted((s1, s2)->Integer.compare(s1.length(), s2.length())).collect(Collectors.toList()));
+
+    }
+
+    public static String reverseLetter(final String str) {
+        // StringBuilder to build the result
+        StringBuilder result = new StringBuilder();
+
+        // Traverse the string in reverse order
+        for (int i = str.length() - 1; i >= 0; i--) {
+            char ch = str.charAt(i);
+
+            // Check if the character is alphabetic
+            if (Character.isAlphabetic(ch)) {
+                result.append(ch);
+            }
+        }
+
+        // Convert StringBuilder to string and return
+        return result.toString();
+    }
+
+
+    public static int[] reverse(int n){
+        int[] result = new int[n];
+        int index = 0;
+        for(int i = n; i >=1; i--) {
+            result[index] = i;
+            index ++;
+        }
+        return result;
+    }
+
+    public static int[] reverseWithStreams(int n) {
+        return IntStream.range(-n, 0).map(Math::abs).toArray();
+    }
+
+    public static String makeReadable(int seconds) {
+        // Do something
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int remainingSeconds = seconds % 60;
+        return String.format("%02d:%02d:%02d", hours, minutes, remainingSeconds);
+    }
+
+    public static String doubleChar(String s){
+        //enter your code here
+        StringBuilder sb = new StringBuilder();
+        for(int index = 0; index < s.length(); index++) {
+            sb.append(s.charAt(index) + s.charAt(index));
+        }
+        return sb.toString();
+    }
+
+
+    public static Map<Character, Integer> count(String str) {
+        // Happy coding!
+        Map<Character, Integer> ret = new HashMap<>();
+        for(char ch : str.toCharArray())
+        {
+            if(ret.containsKey(ch))
+                ret.put(ch, ret.get(ch) + 1);
+            else
+                ret.put(ch, 1);
+        }
+        return ret;
+    }
+    public static int Past(int h, int m, int s)
+    {
+        //Happy Coding! ^_^
+        return (((h * 3600) + ( m * 60) + (s)) * 1000);
+    }
+
+    public int min(int[] list) {
+        OptionalInt x = Arrays.stream(list).min();
+        return x.getAsInt();
+    }
+
+    public int max(int[] list) {
+
+        OptionalInt x =  Arrays.stream(list).max();
+        return x.getAsInt();
+    }
+
+    /*
+    []                                -->  "no one likes this"
+["Peter"]                         -->  "Peter likes this"
+["Jacob", "Alex"]                 -->  "Jacob and Alex like this"
+["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
+["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this"
+     */
+    public static String whoLikesIt(String... names) {
+        //Do your magic here
+        //Do your magic here
+        StringBuilder sb = new StringBuilder();
+        if(names.length == 0)
+            sb.append("no one likes this");
+
+        else if(names.length == 1)
+        {
+            sb.append(names[0]).append(" ");
+            sb.append("likes this");
+        }
+        else if(names.length == 2)
+        {
+            sb.append(names[0] + " and " + names[1]);
+            sb.append(" ");
+            sb.append("like this");
+        }
+        else if(names.length == 3)
+        {
+            sb.append(names[0] + ", " + names[1] + " and " + names[2]);
+            sb.append(" ");
+            sb.append("like this");
+        }
+        else
+        {
+            sb.append(names[0] + ", " + names[1] + " and " + (names.length - 2) + " others ");
+            sb.append("like this");
+        }
+
+
+
+        return sb.toString();
+    }
+
+    public static boolean  isIsogram(String str) {
+        HashSet<Character> map = new HashSet<>();
+
+        str = str.toLowerCase();
+        for(char c: str.toCharArray())
+        {
+            if(map.contains(c))
+                return false;
+            else
+            {
+                map.add(c);
+            }
+        }
+        return true;
+    }
+    public static boolean isIsogramStreams(String str)
+    {
+        return str.length() == str.chars().distinct().count();
+    }
+
+    public static int findIt(int[] a) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i : a)
+        {
+            if(map.containsKey(i))
+                map.put(i, map.get(i) + 1);
+            else
+            {
+                map.put(i, 1);
+            }
+        }
+        for(Map.Entry<Integer, Integer> entry : map.entrySet())
+        {
+            if(entry.getValue()  % 2 != 0)
+            {
+                return entry.getKey();
+            }
+        }
+        return -1;
+    }
+
+    public static int[] map(int[] arr) {
+        int[] values = new int[arr.length];
+        for(int i = 0; i < arr.length; i++)
+        {
+            values[i] = arr[i] * 2;
+        }
+        return values;
+    }
+
+    public static int[] mapWithStreams(int[] arr)
+    {
+        return Arrays.stream(arr).map(x -> x*2).toArray();
+    }
+
+
+    public static int squareSum(int[] n)
+    {
+        return Arrays.stream(n).map(x->x*x).sum();
     }
 }
