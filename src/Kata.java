@@ -821,4 +821,53 @@ public class Kata
     {
         return Arrays.stream(n).map(x->x*x).sum();
     }
+
+    public String dnaToRna(String dna) {
+        return dna.chars().mapToObj(c->(char) c).map(c->c=='T' ? 'U':'C').map(String::valueOf).collect(Collectors.joining());
+    }
+
+    public static String updateLight(String current) {
+            if(current.toLowerCase().equals("green"))
+                return "yellow";
+            else if(current.toLowerCase().equals("yellow"))
+                return "red";
+            else
+                return "green";
+
+    }
+
+    public static int sortDescNumber(final int num) {
+        String numberString = Integer.toString(num);
+        char[] digits = numberString.toCharArray();
+        Arrays.sort(digits);
+        StringBuilder sb = new StringBuilder(new String(digits));
+        sb.reverse();
+        return Integer.parseInt(sb.toString());
+
+    }
+
+    public static String firstNonRepeatingLetter(String s){
+        // Add your code here
+        if(s == null || s.isEmpty())
+            return "";
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+
+        // Convert the input string to lowercase for counting
+        String lowerCaseString = s.toLowerCase();
+
+        // Fill the frequency map with character counts
+        for (char c : lowerCaseString.toCharArray()) {
+            frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+        }
+
+        // Find the first non-repeating character in the original string
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (frequencyMap.get(Character.toLowerCase(c)) == 1) {
+                return Character.toString(c);
+            }
+        }
+        // If no non-repeating character is found, return an empty string
+        return "";
+    }
 }

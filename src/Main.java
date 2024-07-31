@@ -21,6 +21,8 @@ public class Main {
         System.out.println(reverseWords("     "));
         System.out.println(Kata.testStreams());
         Kata.sortArray(names);
+        String toDecode = "I Like To Take Candy From A Baby";
+        System.out.println(Kata.firstNonRepeatingLetter(toDecode));
     }
 
     public static long factorial(int n)
